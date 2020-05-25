@@ -1,8 +1,8 @@
 # KRDAE EARTHQUAKE API (NODE.JS)
 
 
-1.npm i request-promise
-2.(earthquake.js)[] file add to project root
+1.npm i request-promise \
+2.earthquake.js file add to project root
 
 ```javascript
 const apiEarthquake = require('./earthquake')
