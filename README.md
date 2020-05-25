@@ -1,4 +1,4 @@
-# krdae-earthquake-api
+# KRDAE EARTHQUAKE API
 ```javascript
 const apiEarthquake = require('./earthquake')
 
