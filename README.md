@@ -1,5 +1,6 @@
 # krdae-earthquake-api
-```const apiEarthquake = require('./earthquake')
+```javascript
+const apiEarthquake = require('./earthquake')
 
 apiEarthquake()
     .then(count => {
