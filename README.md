@@ -1,6 +1,8 @@
 # KRDAE EARTHQUAKE API (NODE.JS)
 
 
+1.npm i request-promise
+2.(earthquake.js)[] file add to project root
 
 ```javascript
 const apiEarthquake = require('./earthquake')
@@ -19,7 +21,7 @@ apiEarthquake()
 ```
 {
     result: [
-        {
+	{
             magnitude: "2.5",
             latitude: "38.3335",
             longitude: "44.3443",
