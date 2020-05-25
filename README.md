@@ -13,8 +13,9 @@ apiEarthquake()
         console.log(err)
     })
 ```
-## EXAMPLE RESPONSE
 
+
+## EXAMPLE RESPONSE
 ```
 {
     result: [
