@@ -1,0 +1,1 @@
+# krdae-earthquake-api
