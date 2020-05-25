@@ -1,4 +1,4 @@
-# KRDAE EARTHQUAKE API
+# KRDAE EARTHQUAKE API (NODE.JS)
 
 
 
@@ -13,7 +13,7 @@ apiEarthquake()
         console.log(err)
     })
 ```
-
+## EXAMPLE RESPONSE
 
 ```
 {
