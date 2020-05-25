@@ -9,7 +9,7 @@ const apiEarthquake = require('./earthquake')
 
 apiEarthquake()
     .then(count => {
-        console.log(JSON.stringify(count))
+        console.log(count)
     })
     .catch(err => {
         console.log(err)
