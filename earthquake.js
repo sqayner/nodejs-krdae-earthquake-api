@@ -18,13 +18,13 @@ module.exports = function getData() {
             )
             earthquakeArray.forEach(element => {
                 var data = {
-                    magnitude: getMagnitude(element),
-                    latitude: getLat(element),
-                    longitude: getLong(element),
-                    location: getLocation(element),
-                    depth: getDepth(element),
-                    timestamp: getTimestamp(element),
-                    time: getTime(element)
+                    "magnitude": getMagnitude(element),
+                    "latitude": getLat(element),
+                    "longitude": getLong(element),
+                    "location": getLocation(element),
+                    "depth": getDepth(element),
+                    "timestamp": getTimestamp(element),
+                    "time": getTime(element)
                 }
                 apiRoot[result].push(data)
             })
