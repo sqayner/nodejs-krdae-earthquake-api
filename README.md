@@ -1,7 +1,5 @@
 # KRDAE EARTHQUAKE API (NODE.JS)
 
-## WORDS AND THEIR MEANINGS
-
 ## USAGE
 1. Add [request-promise](https://www.npmjs.com/package/request-promise) library to your project. You can use `> npm i request-promise`
 2. Earthquake.js file add to project root
