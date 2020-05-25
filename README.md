@@ -16,6 +16,7 @@ apiEarthquake()
         console.log(err)
     })
 ```
+terminology
 4. You can use it to start your project `> npm start` or `> node index.js`
 
 ## EXAMPLE RESPONSE
