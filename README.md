@@ -17,7 +17,8 @@ apiEarthquake()
 
 ```
 {
-    result: [{
+    result: [
+        {
             magnitude: "2.5",
             latitude: "38.3335",
             longitude: "44.3443",
