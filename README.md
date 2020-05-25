@@ -2,7 +2,7 @@
 
 
 ## USAGE
-1. Add [request-promise](https://www.npmjs.com/package/request-promise) library to your project. You can use `asdsads`
+1. Add [request-promise](https://www.npmjs.com/package/request-promise) library to your project. You can use `> npm i request-promise`
 2. Earthquake.js file add to project root
 3. Add the following code to the index.js file.
 ```javascript
