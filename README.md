@@ -2,9 +2,7 @@
 
 
 ## USAGE
-1. ```
-Npm i request-promise
-```
+1. ``Npm i request-promise``
 2. Earthquake.js file add to project root
 3. Add the following code to the index.js file.
 ```javascript
