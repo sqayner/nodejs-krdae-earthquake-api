@@ -3,7 +3,7 @@
 ## USAGE
 1. Add [request-promise](https://www.npmjs.com/package/request-promise) library to your project. You can use `> npm i request-promise`
 2. Earthquake.js file add to project root
-3. Add the following code to the index.js file.
+3. You can use the API with the code below.
 ```javascript
 const apiEarthquake = require('./earthquake')
 
@@ -15,7 +15,6 @@ apiEarthquake()
         console.log(err)
     })
 ```
-4. You can use it to start your project `> npm start` or `> node index.js`
 
 ## EXAMPLE RESPONSE
 ```json
