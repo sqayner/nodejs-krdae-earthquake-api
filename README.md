@@ -44,4 +44,4 @@ apiEarthquake()
 ```
 
 ## DATA SOURCE
-[Boğaziçi Üniversitesi Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü Bölgesel Deprem-Tusunami İzleme ve Değerlendirme Merkezi](http://www.koeri.boun.edu.tr/)
+[Boğaziçi Üniversitesi Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü Bölgesel Deprem-Tsunami İzleme ve Değerlendirme Merkezi](http://www.koeri.boun.edu.tr/)
