@@ -1,12 +1,14 @@
-const rp = require('request-promise')
-var url = 'http://www.koeri.boun.edu.tr/scripts/lst7.asp'
+const fetch = require('node-fetch')
+var url
 var apiRoot = {}
 var result = 'result'
 apiRoot[result] = []
 var earthquakeArray = []
 
 module.exports = function getData() {
-    return rp(url)
+    url = 'http://www.koeri.boun.edu.tr/scripts/lst' + getRandomInt(10) + '.asp'
+    return fetch(url)
+        .then(html => html.text())
         .then(html => {
             apiRoot[result] = []
             earthquakeArray = []
@@ -31,6 +33,10 @@ module.exports = function getData() {
             return apiRoot
         })
         .catch()
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
 }
 
 function getTimestamp(data) {
@@ -70,11 +76,11 @@ function getDepth(data) {
 }
 
 function getLocation(data) {
-    var location = data.slice(71, 121).replace(/ /gi, '')
+    var location = data.slice(71, 121).trim()
     return location
 }
 
 function getTime(data) {
-    var time = data.slice(0, 19).replace(/ /gi, '')
+    var time = data.slice(0, 19)
     return time
 }
