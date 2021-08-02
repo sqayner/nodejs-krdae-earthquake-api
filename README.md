@@ -1,8 +1,8 @@
 # KRDAE EARTHQUAKE API (NODE.JS)
 
 ## USAGE
-1.`> npm i nodejs-krdae-earthquake-api`
-3. You can use the API with the code below.
+1. `> npm i nodejs-krdae-earthquake-api`
+2. You can use the API with the code below.
 ```javascript
 const apiEarthquake = require('nodejs-krdae-earthquake-api')
 
