@@ -20,22 +20,30 @@ apiEarthquake()
 {
     "result": [
         {
-            "magnitude": "2.1",
-            "latitude": "38.4082",
-            "longitude": "39.2232",
-            "location": "DORTBOLUK-SIVRICE(ELAZIG)",
-            "depth": "5.0",
-            "timestamp": 1590447292,
-            "time": "2020.05.2522:54:52"
+            magnitude: 1.9,
+            coordinates: { 
+                    latitude: 36.4473, 
+                    longitude: 27.043 
+                },
+            location: 'ONIKI ADALAR (AKDENIZ)',
+            depth: 5,
+            unix_timestamp: 1629400027,
+            datetime: '2021-08-19T22:07:07+0300',
+            hash: 'faadfb3d546d8410722681141b008e11',
+            hash2: 'c69e610a80696ec3561cb1f580b62e13'
         },
         {
-            "magnitude": "2.7",
-            "latitude": "35.5043",
-            "longitude": "26.7700",
-            "location": "AKDENIZ",
-            "depth": "4.5",
-            "timestamp": 1590446865,
-            "time": "2020.05.2522:47:45"
+            magnitude: 2.5,
+            coordinates: { 
+                    latitude: 36.427, 
+                    longitude: 27.0287
+                },
+            location: 'AKDENIZ',
+            depth: 8,
+            unix_timestamp: 1629398345,
+            datetime: '2021-08-19T21:39:05+0300',
+            hash: '765ef98d7484672df8645c860bd6b879',
+            hash2: 'b8e394b9a82c34fa33fcf2382ad535c3'
         },
         ...
     ]
