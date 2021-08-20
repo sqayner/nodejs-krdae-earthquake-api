@@ -30,8 +30,8 @@ module.exports = function getData() {
                     "unix_timestamp": getUnixTimestamp(element),
                     "datetime": dateFormat(getDateTime(element), "yyyy-mm-dd HH:MM:ss Zo"),
                     "revised": getRevised(element),
-                    "hash": md5(getLat(element) + "," + getLong(element)),
-                    "hash2": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
+                    "id_hash": md5(getLat(element) + "," + getLong(element)),
+                    "hash": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
                 }
                 apiRoot["result"].push(data)
             })
@@ -107,6 +107,28 @@ function getDateTime(data) {
 }
 
 function getRevised(data) {
-    var revised = data.slice(121, data.leght).trim();
-    return revised;
+    var revised = data.slice(121, data.length).trim();
+
+    if (revised == "İlksel") {
+        return null;
+    } else {
+        var dateData = revised.slice(12, revised.length - 1);
+        var date = new Date(
+            Date.UTC(
+                dateData.slice(0, 4),
+                dateData.slice(5, 7) - 1,
+                dateData.slice(8, 10),
+                dateData.slice(11, 13),
+                dateData.slice(14, 16),
+                dateData.slice(17, 19)
+            )
+        );
+        date.setHours(date.getHours() - 3);
+
+        return {
+            "number": revised.slice(7, 8),
+            "unix_timestamp": date.getTime() / 1000,
+            "datetime": dateFormat(date, "yyyy-mm-dd HH:MM:ss Zo"),
+        };
+    }
 }

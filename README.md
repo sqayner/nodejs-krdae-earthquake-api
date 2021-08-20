@@ -18,32 +18,35 @@ apiEarthquake()
 ## EXAMPLE RESPONSE
 ```json
 {
-    "result": [
+  "source_url": "http://www.koeri.boun.edu.tr/scripts/lst2.asp",
+  "result": [
         {
-            "magnitude": 1.9,
-            "coordinates": { 
-                    "latitude": 36.4473, 
-                    "longitude": 27.043 
-                },
-            "location": "ONIKI ADALAR (AKDENIZ)",
-            "depth": 5,
-            "unix_timestamp": 1629400027,
-            "datetime": "2021-08-19T22:07:07+0300",
-            "hash": "faadfb3d546d8410722681141b008e11",
-            "hash2": "c69e610a80696ec3561cb1f580b62e13"
+            "magnitude": 2.4,
+            "coordinates": {
+                "latitude": 36.9348,
+                "longitude": 27.3252
+            },
+            "location": "GOKOVA KORFEZI (AKDENIZ)",
+            "depth": 8.5,
+            "unix_timestamp": 1629467592,
+            "datetime": "2021-08-20 16:53:12 GMT+0300",
+            "revised": null,
+            "id_hash": "c9efe10825e2639cef790768d26767dd",
+            "hash": "d03a3d0b42f52a4b93e29db106fa57ed"
         },
         {
-            "magnitude": 2.5,
-            "coordinates": { 
-                    "latitude": 36.427, 
-                    "longitude": 27.0287
-                },
-            "location": "AKDENIZ",
-            "depth": 8,
-            "unix_timestamp": 1629398345,
-            "datetime": "2021-08-19T21:39:05+0300",
-            "hash": "765ef98d7484672df8645c860bd6b879",
-            "hash2": "b8e394b9a82c34fa33fcf2382ad535c3"
+            "magnitude": 2.7,
+            "coordinates": {
+                "latitude": 39.5932,
+                "longitude": 28.095
+            },
+            "location": "MAHMUDIYE-KEPSUT (BALIKESIR)",
+            "depth": 7.5,
+            "unix_timestamp": 1629466788,
+            "datetime": "2021-08-20 16:39:48 GMT+0300",
+            "revised": null,
+            "id_hash": "a58f2c0c05b1211317533de203503142",
+            "hash": "b27fe9a9198600c194c08e15c097d0ef"
         },
         "..."
     ]

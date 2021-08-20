@@ -1,6 +1,6 @@
 {
     "name": "nodejs-krdae-earthquake-api",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "description": "1. `> npm i nodejs-krdae-earthquake-api`\r 2. You can use the API with the code below.\r ```javascript\r const apiEarthquake = require('nodejs-krdae-earthquake-api')",
     "main": "index.js",
     "dependencies": {
