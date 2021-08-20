@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
-var md5 = require('md5');
-var dateFormat = require("dateformat");
+const encoder = require('turkish-char-encoding');
+const md5 = require('md5');
+const dateFormat = require("dateformat");
 var url
 var apiRoot = {}
 var earthquakeArray = []
@@ -8,12 +9,12 @@ var earthquakeArray = []
 module.exports = function getData() {
     url = 'http://www.koeri.boun.edu.tr/scripts/lst' + getRandomInt(10, 3) + '.asp'
     return fetch(url)
-        .then(html => html.text())
+        .then(html => html.buffer())
         .then(html => {
             apiRoot["source_url"] = url
             apiRoot["result"] = []
             earthquakeArray = []
-            earthquakeArray = html.split(/\r?\n/)
+            earthquakeArray = encoder('win-1254').toUTF8(html).split(/\r?\n/)
             var preStartIndex = earthquakeArray.indexOf("<pre>");
             var preEndIndex = earthquakeArray.indexOf("</pre>");
             earthquakeArray = earthquakeArray.slice(preStartIndex + 7, preEndIndex - 1);
@@ -27,7 +28,8 @@ module.exports = function getData() {
                     "location": getLocation(element),
                     "depth": getDepth(element),
                     "unix_timestamp": getUnixTimestamp(element),
-                    "datetime": dateFormat(getDateTime(element), "yyyy-mm-dd'T'HH:MM:sso"),
+                    "datetime": dateFormat(getDateTime(element), "yyyy-mm-dd HH:MM:ss Zo"),
+                    "revised": getRevised(element),
                     "hash": md5(getLat(element) + "," + getLong(element)),
                     "hash2": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
                 }
@@ -51,10 +53,22 @@ function getUnixTimestamp(data) {
 }
 
 function getMagnitude(data) {
+    var MD = data.slice(55, 58);
     var ML = data.slice(60, 63);
     var MW = data.slice(65, 68);
-    if (MW == '-.-') return parseFloat(ML);
-    else return parseFloat(MW);
+    if (MW == '-.-') {
+        if (ML == '-.-') {
+            if (MD == '-.-') {
+                return parseFloat(0)
+            } else {
+                return parseFloat(MD)
+            }
+        } else {
+            return parseFloat(ML)
+        }
+    } else {
+        return parseFloat(MW)
+    }
 }
 
 function getLat(data) {
@@ -90,4 +104,9 @@ function getDateTime(data) {
     );
     date.setHours(date.getHours() - 3);
     return date;
+}
+
+function getRevised(data) {
+    var revised = data.slice(121, data.leght).trim();
+    return revised;
 }
