@@ -29,7 +29,7 @@ apiEarthquake()
             "location": "GOKOVA KORFEZI (AKDENIZ)",
             "depth": 8.5,
             "unix_timestamp": 1629467592,
-            "datetime": "2021-08-20 16:53:12 GMT+0300",
+            "datetime": "2021-08-20T16:53:12+0300",
             "revised": null,
             "id_hash": "c9efe10825e2639cef790768d26767dd",
             "hash": "d03a3d0b42f52a4b93e29db106fa57ed"
@@ -43,7 +43,7 @@ apiEarthquake()
             "location": "MAHMUDIYE-KEPSUT (BALIKESIR)",
             "depth": 7.5,
             "unix_timestamp": 1629466788,
-            "datetime": "2021-08-20 16:39:48 GMT+0300",
+            "datetime": "2021-08-20T16:39:48+0300",
             "revised": null,
             "id_hash": "a58f2c0c05b1211317533de203503142",
             "hash": "b27fe9a9198600c194c08e15c097d0ef"

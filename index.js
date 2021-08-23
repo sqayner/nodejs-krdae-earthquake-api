@@ -28,7 +28,7 @@ module.exports = function getData() {
                     "location": getLocation(element),
                     "depth": getDepth(element),
                     "unix_timestamp": getUnixTimestamp(element),
-                    "datetime": dateFormat(getDateTime(element), "yyyy-mm-dd HH:MM:ss Zo"),
+                    "datetime": dateFormat(getDateTime(element), "isoDateTime"),
                     "revised": getRevised(element),
                     "id_hash": md5(getLat(element) + "," + getLong(element)),
                     "hash": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
@@ -128,7 +128,7 @@ function getRevised(data) {
         return {
             "number": revised.slice(7, 8),
             "unix_timestamp": date.getTime() / 1000,
-            "datetime": dateFormat(date, "yyyy-mm-dd HH:MM:ss Zo"),
+            "datetime": dateFormat(date, "isoDateTime"),
         };
     }
 }
