@@ -1,8 +1,8 @@
 # KRDAE EARTHQUAKE API (NODE.JS)
 
-## USAGE
+## KULLANIM
 1. `> npm i nodejs-krdae-earthquake-api`
-2. You can use the API with the code below.
+2. Aşağıdaki örnek kod ile kullanabilirsiniz.
 ```javascript
 const apiEarthquake = require('nodejs-krdae-earthquake-api')
 
@@ -15,7 +15,18 @@ apiEarthquake()
     })
 ```
 
-## EXAMPLE RESPONSE
+3. Aşağıdaki örnek kod ile sadece belirli bir şehirin 100 kilometrelik alanında olan depremleri alabilirsiniz.
+```javascript
+apiEarthquake("istanbul")
+    .then(count => {
+        console.log(count)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+```
+
+## ÖRNEK CEVAP
 ```json
 {
   "source_url": "http://www.koeri.boun.edu.tr/scripts/lst2.asp",
@@ -53,5 +64,5 @@ apiEarthquake()
 }
 ```
 
-## DATA SOURCE
+## VERİ KAYNAĞI
 [Boğaziçi Üniversitesi Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü Bölgesel Deprem-Tsunami İzleme ve Değerlendirme Merkezi](http://www.koeri.boun.edu.tr/)

@@ -2,11 +2,13 @@ const fetch = require('node-fetch')
 const encoder = require('turkish-char-encoding');
 const md5 = require('md5');
 const dateFormat = require("dateformat");
+const turkeyCities = require("./cities");
+const cities = require('./cities');
 var url
 var apiRoot = {}
 var earthquakeArray = []
 
-module.exports = function getData() {
+module.exports = function getData(country) {
     url = 'http://www.koeri.boun.edu.tr/scripts/lst' + getRandomInt(10, 3) + '.asp'
     return fetch(url)
         .then(html => html.buffer())
@@ -35,9 +37,58 @@ module.exports = function getData() {
                 }
                 apiRoot["result"].push(data)
             })
+
+            //------
+            //sadece belirli bir ile yakın depremleri almak için kod satırı
+            if (country !== undefined && country !== null && country !== "") {
+                var cityData = turkeyCities(country);
+                if (cityData !== []) {
+                    var cityData = cityData[0];
+                    var earthquakes = apiRoot["result"];
+                    apiRoot["result"] = [];
+                    earthquakes.filter(function (earthquake) {
+                        return checkIfInside([earthquake.coordinates.latitude, earthquake.coordinates.longitude], [cityData.coordinates.latitude, cityData.coordinates.longitude])
+                    }).forEach(earthquake => {
+                        apiRoot["result"].push(earthquake);
+                    });
+                }
+            }
+            //------
+
             return apiRoot
         })
         .catch()
+}
+
+function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
+    var earthRadiusKm = 6371;
+
+    var dLat = degreesToRadians(lat2 - lat1);
+    var dLon = degreesToRadians(lon2 - lon1);
+
+    lat1 = degreesToRadians(lat1);
+    lat2 = degreesToRadians(lat2);
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+}
+
+function degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+function checkIfInside(spotCoordinates, center) {
+    var radius = 100;
+    let newRadius = distanceInKmBetweenEarthCoordinates(spotCoordinates[0], spotCoordinates[1], center[0], center[1]);
+    if (newRadius < radius) {
+        return true;
+    } else if (newRadius > radius) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function getRandomInt(max, ...without) {

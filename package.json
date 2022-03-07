@@ -1,33 +1,33 @@
 {
-    "name": "nodejs-krdae-earthquake-api",
-    "version": "1.5.3",
-    "description": "1. `> npm i nodejs-krdae-earthquake-api`\r 2. You can use the API with the code below.\r ```javascript\r const apiEarthquake = require('nodejs-krdae-earthquake-api')",
-    "main": "index.js",
-    "dependencies": {
-        "dateformat": "^4.5.1",
-        "md5": "^2.3.0",
-        "node-fetch": "^2.6.1",
-        "turkish-char-encoding": "0.0.5"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "earthquakes",
-        "krdae",
-        "Kandilli",
-        "earthquake",
-        "deprem"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sqayner/nodejs-krdae-earthquake-api.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/sqayner/nodejs-krdae-earthquake-api/issues"
-    },
-    "homepage": "https://github.com/sqayner/nodejs-krdae-earthquake-api#readme"
+  "name": "nodejs-krdae-earthquake-api",
+  "version": "1.5.4",
+  "description": "1. `> npm i nodejs-krdae-earthquake-api`\r 2. Aşağıdaki örnek kod ile kullanabilirsiniz.\r ```javascript\r const apiEarthquake = require('nodejs-krdae-earthquake-api')",
+  "main": "index.js",
+  "dependencies": {
+    "dateformat": "^4.5.1",
+    "md5": "^2.3.0",
+    "node-fetch": "^2.6.1",
+    "turkish-char-encoding": "0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "earthquakes",
+    "krdae",
+    "Kandilli",
+    "earthquake",
+    "deprem"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqayner/nodejs-krdae-earthquake-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sqayner/nodejs-krdae-earthquake-api/issues"
+  },
+  "homepage": "https://github.com/sqayner/nodejs-krdae-earthquake-api#readme"
 }
