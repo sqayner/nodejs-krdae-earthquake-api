@@ -15,7 +15,7 @@ apiEarthquake()
     })
 ```
 
-3. Aşağıdaki örnek kod ile sadece belirli bir şehirin 100 kilometrelik alanında olan depremleri alabilirsiniz.
+3. Aşağıdaki örnek kod ile sadece belirli bir şehrin 100 kilometrelik alanında olan depremleri alabilirsiniz.
 ```javascript
 apiEarthquake("istanbul")
     .then(count => {
