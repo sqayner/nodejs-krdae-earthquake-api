@@ -26,7 +26,7 @@ apiEarthquake("istanbul")
     })
 ```
 
-## ÖRNEK CEVAP
+## ÖRNEK YANIT
 ```json
 {
   "source_url": "http://www.koeri.boun.edu.tr/scripts/lst2.asp",
