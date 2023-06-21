@@ -2,11 +2,11 @@
 
 ## KULLANIM
 1. `> npm i nodejs-krdae-earthquake-api`
-2. Aşağıdaki örnek kod ile kullanabilirsiniz.
+2. Aşağıdaki örnek kod ile türkiye ve çevresinde olan son 500 depremi json formatında alabilirsiniz.
 ```javascript
-const apiEarthquake = require('nodejs-krdae-earthquake-api')
+const krdae = require('nodejs-krdae-earthquake-api')
 
-apiEarthquake()
+krdae.getLast500Earthquakes()
     .then(count => {
         console.log(count)
     })
@@ -15,9 +15,20 @@ apiEarthquake()
     })
 ```
 
-3. Aşağıdaki örnek kod ile sadece belirli bir şehrin 100 kilometrelik alanında olan depremleri alabilirsiniz.
+3. Aşağıdaki örnek kod ile sadece belirli bir şehrin 100 kilometrelik yarıçapın içinde olan depremleri json formatında alabilirsiniz.
 ```javascript
-apiEarthquake("istanbul")
+krdae.getFromCity("istanbul")
+    .then(count => {
+        console.log(count)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+```
+
+4. Aşağıdaki örnek kod ile sadece belirli bir koordinat ve yarıçaptaki depremleri json formatında alabilirsiniz.
+```javascript
+krdae.getFromRadiusAndCoordinates(latitude, longitude, radius)
     .then(count => {
         console.log(count)
     })

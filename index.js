@@ -3,61 +3,97 @@ const encoder = require('turkish-char-encoding');
 const md5 = require('md5');
 const dateFormat = require("dateformat");
 const turkeyCities = require("./cities");
-const cities = require('./cities');
-var url
-var apiRoot = {}
-var earthquakeArray = []
 
-module.exports = function getData(country) {
-    url = 'http://www.koeri.boun.edu.tr/scripts/lst' + getRandomInt(10, 3) + '.asp'
+function parseEarthquakes(html, url) {
+    var apiRoot = { "source_url": url, "result": [] }
+    var earthquakeArray = encoder('win-1254').toUTF8(html).split(/\r?\n/)
+    var preStartIndex = earthquakeArray.indexOf("<pre>");
+    var preEndIndex = earthquakeArray.indexOf("</pre>");
+    earthquakeArray = earthquakeArray.slice(preStartIndex + 7, preEndIndex - 1);
+    earthquakeArray.forEach(element => {
+        var data = {
+            "magnitude": getMagnitude(element),
+            "coordinates": {
+                "latitude": getLat(element),
+                "longitude": getLong(element)
+            },
+            "location": getLocation(element),
+            "depth": getDepth(element),
+            "unix_timestamp": getUnixTimestamp(element),
+            "datetime": dateFormat(getDateTime(element), "isoDateTime"),
+            "revised": getRevised(element),
+            "id_hash": md5(getLat(element) + "," + getLong(element)),
+            "hash": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
+        }
+        apiRoot["result"].push(data)
+    })
+
+    return apiRoot
+}
+
+module.exports.getLast500Earthquakes = function () {
+    var url = randomURL()
+
     return fetch(url)
         .then(html => html.buffer())
         .then(html => {
-            apiRoot["source_url"] = url
-            apiRoot["result"] = []
-            earthquakeArray = []
-            earthquakeArray = encoder('win-1254').toUTF8(html).split(/\r?\n/)
-            var preStartIndex = earthquakeArray.indexOf("<pre>");
-            var preEndIndex = earthquakeArray.indexOf("</pre>");
-            earthquakeArray = earthquakeArray.slice(preStartIndex + 7, preEndIndex - 1);
-            earthquakeArray.forEach(element => {
-                var data = {
-                    "magnitude": getMagnitude(element),
-                    "coordinates": {
-                        "latitude": getLat(element),
-                        "longitude": getLong(element)
-                    },
-                    "location": getLocation(element),
-                    "depth": getDepth(element),
-                    "unix_timestamp": getUnixTimestamp(element),
-                    "datetime": dateFormat(getDateTime(element), "isoDateTime"),
-                    "revised": getRevised(element),
-                    "id_hash": md5(getLat(element) + "," + getLong(element)),
-                    "hash": md5(getMagnitude(element) + "," + getLat(element) + "," + getLong(element) + "," + getDepth(element) + "," + getUnixTimestamp(element) + "," + getLocation(element))
-                }
-                apiRoot["result"].push(data)
-            })
+            return parseEarthquakes(html, url);
+        })
+        .catch()
+};
 
-            //------
-            //sadece belirli bir ile yakın depremleri almak için kod satırı
-            if (country !== undefined && country !== null && country !== "") {
-                var cityData = turkeyCities(country);
+module.exports.getFromCity = function (city) {
+    var url = randomURL()
+
+    return fetch(url)
+        .then(html => html.buffer())
+        .then(html => {
+            var parsed = parseEarthquakes(html, url);
+            parsed["city"] = city;
+
+            if (city !== undefined && city !== null && city !== "") {
+                var cityData = turkeyCities(city);
                 if (cityData !== []) {
                     var cityData = cityData[0];
-                    var earthquakes = apiRoot["result"];
-                    apiRoot["result"] = [];
+                    var earthquakes = parsed["result"];
+                    parsed["result"] = [];
                     earthquakes.filter(function (earthquake) {
-                        return checkIfInside([earthquake.coordinates.latitude, earthquake.coordinates.longitude], [cityData.coordinates.latitude, cityData.coordinates.longitude])
+                        return checkIfInside([earthquake.coordinates.latitude, earthquake.coordinates.longitude], [cityData.coordinates.latitude, cityData.coordinates.longitude], 100)
                     }).forEach(earthquake => {
-                        apiRoot["result"].push(earthquake);
+                        parsed["result"].push(earthquake);
                     });
                 }
             }
-            //------
 
-            return apiRoot
+            return parsed;
         })
         .catch()
+}
+
+module.exports.getFromRadiusAndCoordinates = function (lat, lon, rad) {
+    var url = randomURL()
+
+    return fetch(url)
+        .then(html => html.buffer())
+        .then(html => {
+            var parsed = parseEarthquakes(html, url);
+            parsed["distance"] = { "coordinates": { "latitude": lat, "longitude": lon }, "radius": rad }
+
+            var earthquakes = parsed["result"];
+            parsed["result"] = [];
+            earthquakes.filter(function (earthquake) {
+                return checkIfInside([earthquake.coordinates.latitude, earthquake.coordinates.longitude], [lat, lon], rad)
+            }).forEach(earthquake => {
+                parsed["result"].push(earthquake);
+            });
+
+            return parsed;
+        })
+        .catch()
+}
+
+function randomURL() {
+    return 'http://www.koeri.boun.edu.tr/scripts/lst' + getRandomInt(10, 3) + '.asp';
 }
 
 function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
@@ -79,8 +115,7 @@ function degreesToRadians(degrees) {
     return degrees * Math.PI / 180;
 }
 
-function checkIfInside(spotCoordinates, center) {
-    var radius = 100;
+function checkIfInside(spotCoordinates, center, radius) {
     let newRadius = distanceInKmBetweenEarthCoordinates(spotCoordinates[0], spotCoordinates[1], center[0], center[1]);
     if (newRadius < radius) {
         return true;
