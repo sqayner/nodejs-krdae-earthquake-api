@@ -1,7 +1,7 @@
 {
   "name": "nodejs-krdae-earthquake-api",
-  "version": "1.5.5",
-  "description": "1. `> npm i nodejs-krdae-earthquake-api`\r 2. Aşağıdaki örnek kod ile kullanabilirsiniz.\r ```javascript\r const apiEarthquake = require('nodejs-krdae-earthquake-api')",
+  "version": "1.5.6",
+  "description": "Bu paket ile TÜRKİYE CUMHURİYETİ ve çevresindeki ülkeleri kapsayan bir alan içerisinde oluşan son 500 depremi json formatında alabilirsiniz.",
   "main": "index.js",
   "dependencies": {
     "dateformat": "^4.5.1",
@@ -9,7 +9,6 @@
     "node-fetch": "^2.6.1",
     "turkish-char-encoding": "0.0.5"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
